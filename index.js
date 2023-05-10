@@ -50,6 +50,7 @@ const {WebhookClient, EmbedBuilder} = require('discord.js');
 async function reportSuccessReportState(themeName, timeToDeploy) {
     const url = core.getInput('webhook-url') || undefined;
     if (!url) {
+        console.log('No webhook URL provided, skipping Discord notification'); // eslint-disable-line no-console
         return;
     }
 
