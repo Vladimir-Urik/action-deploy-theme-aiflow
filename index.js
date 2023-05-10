@@ -67,4 +67,5 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
         // eslint-disable-next-line max-lines
         embeds: [embed]
     });
+    console.log('Successfully reported deployment to Discord'); // eslint-disable-line no-console
 }
