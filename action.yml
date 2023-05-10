@@ -1,4 +1,4 @@
-name: 'Deploy Ghost Theme'
+name: 'Deploy Ghost Theme (AiFlow)'
 description: 'Build & deploy a theme to your Ghost site'
 branding:
   icon: 'cloud-lightning'
@@ -21,6 +21,12 @@ inputs:
     required: false
   working-directory:
     description: 'A custom directory to zip when a theme is in a subdirectory'
+    required: false
+  webhook-url:
+    description: 'A webhook URL embed'
+    required: false
+  page-url:
+    description: 'A page URL to discord webhook embed'
     required: false
 runs:
   using: 'node16'
