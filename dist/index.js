@@ -2094,14 +2094,19 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     core.debug(`Sending Discord notification to ${url}`);
     core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
     core.debug(`Page URL: ${pageUrl}`);
-    await axios.post(url, {
+
+    axios.post(url, {
         embeds: [embed]
     }, {
         headers: {
             'Content-Type': 'application/json'
         }
+    }).then((response) => {
+        core.debug(`Discord response: ${response.status}`);
+        core.debug(`Discord response: ${response.statusText}`);
+    }).catch((error) => {
+        core.debug(`Discord error: ${error}`);
     });
-    core.debug('Discord notification sent');
 }
 
 
