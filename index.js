@@ -75,11 +75,15 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
     core.debug(`Page URL: ${pageUrl}`);
 
-    await axios.post(url, {
-        embeds: [embed]
-    }, {
+    const axiosInstance = axios.create({
+        timeout: 5000,
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        baseURL: url
+    });
+
+    await axiosInstance.post('', {
+        embeds: [embed]
     });
 }
