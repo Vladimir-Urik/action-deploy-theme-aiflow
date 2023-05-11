@@ -2378,6 +2378,7 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     // eslint-disable-next-line max-lines
     core.debug(JSON.stringify(embed, null, 2));
     core.debug(`Sending Discord notification to ${url}`);
+    core.debug('HTTPS?: ' + url.startsWith('https://'));
     core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
     core.debug(`Page URL: ${pageUrl}`);
 
