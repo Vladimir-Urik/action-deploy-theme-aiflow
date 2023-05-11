@@ -63,6 +63,7 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
         title: 'Theme Deployed',
         description: `Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`,
         color: 0x00ff00,
+        // eslint-disable-next-line max-lines
         timestamp: new Date().toISOString(),
         url: pageUrl
         // eslint-disable-next-line max-lines
