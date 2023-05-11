@@ -42,6 +42,8 @@ const axios = require('axios');
         const themeName = core.getInput('theme-name') || require(pkgPath).name;
         await reportSuccessReportState(themeName, timeToDeploy);
     } catch (err) {
+        console.log('Error uploading theme to Ghost:'); // eslint-disable-line no-console
+        core.error(err);
         console.error(JSON.stringify(err, null, 2)); // eslint-disable-line no-console
         process.exit(1);
     }
@@ -72,16 +74,11 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
     core.debug(`Page URL: ${pageUrl}`);
 
-    axios.post(url, {
+    await axios.post(url, {
         embeds: [embed]
     }, {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then((response) => {
-        core.debug(`Discord response: ${response.status}`);
-        core.debug(`Discord response: ${response.statusText}`);
-    }).catch((error) => {
-        core.debug(`Discord error: ${error}`);
     });
 }
