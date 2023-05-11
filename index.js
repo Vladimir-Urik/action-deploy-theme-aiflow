@@ -50,11 +50,12 @@ const axios = require('axios');
 async function reportSuccessReportState(themeName, timeToDeploy) {
     const url = core.getInput('webhook-url') || undefined;
     if (!url) {
-        console.log('No webhook URL provided, skipping Discord notification'); // eslint-disable-line no-console
+        core.debug('No webhook URL provided, skipping Discord notification');
         return;
     }
 
     const pageUrl = core.getInput('page-url');
+    core.debug(`Page URL: ${pageUrl}`);
 
     const embed = {
         title: 'Theme Deployed',
@@ -62,10 +63,20 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
         color: 0x00ff00,
         timestamp: new Date().toISOString(),
         url: pageUrl
+        // eslint-disable-next-line max-lines
     };
 
     // eslint-disable-next-line max-lines
-    return await axios.post(url, {
+    core.debug(JSON.stringify(embed, null, 2));
+    core.debug(`Sending Discord notification to ${url}`);
+    core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
+    core.debug(`Page URL: ${pageUrl}`);
+    await axios.post(url, {
         embeds: [embed]
+    }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
     });
+    core.debug('Discord notification sent');
 }
