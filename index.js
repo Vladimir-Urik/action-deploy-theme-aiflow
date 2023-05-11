@@ -2,7 +2,6 @@ const path = require('path');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const GhostAdminApi = require('@tryghost/admin-api');
-const axios = require('axios');
 
 (async function main() {
     try {
@@ -65,6 +64,7 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
         color: 0x00ff00,
         // eslint-disable-next-line max-lines
         timestamp: new Date().toISOString(),
+        // eslint-disable-next-line max-lines
         url: pageUrl
         // eslint-disable-next-line max-lines
     };
@@ -75,15 +75,13 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
     core.debug(`Page URL: ${pageUrl}`);
 
-    const axiosInstance = axios.create({
-        timeout: 5000,
+    await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+            embeds: [embed]
+        }),
         headers: {
             'Content-Type': 'application/json'
-        },
-        baseURL: url
-    });
-
-    await axiosInstance.post('', {
-        embeds: [embed]
+        }
     });
 }
