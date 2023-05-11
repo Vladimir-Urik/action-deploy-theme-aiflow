@@ -2,7 +2,9 @@ const path = require('path');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const GhostAdminApi = require('@tryghost/admin-api');
+const fetch = require('cross-fetch')
 
+// eslint-disable-next-line no-unexpected-multiline
 (async function main() {
     try {
         const startTime = Date.now();
