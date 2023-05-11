@@ -60,15 +60,21 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     const pageUrl = core.getInput('page-url');
     await core.debug(`Page URL: ${pageUrl}`);
 
+    const commitAuthorName = process.env.GITHUB_ACTOR;
+    const commitId = process.env.GITHUB_SHA;
+
     const embed = {
         title: 'Theme Deployed',
+        // eslint-disable-next-line max-lines
         description: `Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`,
         color: 0x00ff00,
         // eslint-disable-next-line max-lines
         timestamp: new Date().toISOString(),
         // eslint-disable-next-line max-lines
-        url: pageUrl
-        // eslint-disable-next-line max-lines
+        url: pageUrl,
+        footer: {
+            text: `Deployed by ${commitAuthorName} (${commitId})`
+        }
     };
 
     // eslint-disable-next-line max-lines
