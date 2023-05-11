@@ -61,19 +61,19 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     await core.debug(`Page URL: ${pageUrl}`);
 
     const commitAuthorName = process.env.GITHUB_ACTOR;
-    const commitId = process.env.GITHUB_SHA;
+    const commitHash = process.env.GITHUB_SHA;
 
     const embed = {
         title: 'Theme Deployed',
         // eslint-disable-next-line max-lines
-        description: `Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`,
+        description: `Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.\nHash:\`${commitHash}\`\n\n[View the theme](${pageUrl})`,
         color: 0x00ff00,
         // eslint-disable-next-line max-lines
         timestamp: new Date().toISOString(),
         // eslint-disable-next-line max-lines
         url: pageUrl,
         footer: {
-            text: `Deployed by ${commitAuthorName} (${commitId})`
+            text: `Deployed by ${commitAuthorName}`
         }
     };
 
