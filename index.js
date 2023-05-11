@@ -2,7 +2,7 @@ const path = require('path');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const GhostAdminApi = require('@tryghost/admin-api');
-const {WebhookClient, EmbedBuilder} = require('discord.js');
+const axios = require('axios');
 
 (async function main() {
     try {
@@ -56,17 +56,16 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
 
     const pageUrl = core.getInput('page-url');
 
-    const webhook = new WebhookClient({url});
-    const embed = new EmbedBuilder()
-        .setTitle('Theme Deployed')
-        .setDescription(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`)
-        .setColor('#00ff00')
-        .setTimestamp()
-        .setURL(pageUrl);
+    const embed = {
+        title: 'Theme Deployed',
+        description: `Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`,
+        color: 0x00ff00,
+        timestamp: new Date().toISOString(),
+        url: pageUrl
+    };
 
-    await webhook.send({
-        // eslint-disable-next-line max-lines
+    // eslint-disable-next-line max-lines
+    return await axios.post(url, {
         embeds: [embed]
     });
-    console.log('Successfully reported deployment to Discord'); // eslint-disable-line no-console
 }
