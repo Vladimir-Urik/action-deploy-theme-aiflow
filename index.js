@@ -2,7 +2,7 @@ const path = require('path');
 const core = require('@actions/core');
 const exec = require('@actions/exec');
 const GhostAdminApi = require('@tryghost/admin-api');
-const fetch = require('cross-fetch')
+const axios = require('axios');
 
 // eslint-disable-next-line no-unexpected-multiline
 (async function main() {
@@ -78,13 +78,14 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     await core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
     await core.debug(`Page URL: ${pageUrl}`);
 
-    await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-            embeds: [embed]
-        }),
+    const axiosInstance = axios.create({
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        timeout: 5000
+    });
+
+    await axiosInstance.post(url, {
+        embeds: [embed]
     });
 }

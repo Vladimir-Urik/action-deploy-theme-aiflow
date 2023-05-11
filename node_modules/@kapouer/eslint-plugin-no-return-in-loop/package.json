@@ -1,0 +1,29 @@
+{
+  "name": "@kapouer/eslint-plugin-no-return-in-loop",
+  "version": "1.0.0",
+  "description": "eslint plugin to report return statements in loop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapouer/eslint-plugin-no-return-in-loop.git"
+  },
+  "keywords": [
+    "eslint",
+    "plugin"
+  ],
+  "author": "Jérémy Lal <kapouer@melix.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kapouer/eslint-plugin-no-return-in-loop/issues"
+  },
+  "homepage": "https://github.com/kapouer/eslint-plugin-no-return-in-loop#readme",
+  "devDependencies": {
+    "@kapouer/eslint-config": "^1.5.2"
+  },
+  "eslintConfig": {
+    "extends": "@kapouer/eslint-config"
+  }
+}
