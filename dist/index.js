@@ -2357,12 +2357,12 @@ const fetch = __webpack_require__(612)
 async function reportSuccessReportState(themeName, timeToDeploy) {
     const url = core.getInput('webhook-url') || undefined;
     if (!url) {
-        core.debug('No webhook URL provided, skipping Discord notification');
+        await core.debug('No webhook URL provided, skipping Discord notification');
         return;
     }
 
     const pageUrl = core.getInput('page-url');
-    core.debug(`Page URL: ${pageUrl}`);
+    await core.debug(`Page URL: ${pageUrl}`);
 
     const embed = {
         title: 'Theme Deployed',
@@ -2376,11 +2376,11 @@ async function reportSuccessReportState(themeName, timeToDeploy) {
     };
 
     // eslint-disable-next-line max-lines
-    core.debug(JSON.stringify(embed, null, 2));
-    core.debug(`Sending Discord notification to ${url}`);
-    core.debug('HTTPS?: ' + url.startsWith('https://'));
-    core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
-    core.debug(`Page URL: ${pageUrl}`);
+    await core.debug(JSON.stringify(embed, null, 2));
+    await core.debug(`Sending Discord notification to ${url}`);
+    await core.debug('HTTPS?: ' + url.startsWith('https://'));
+    await core.debug(`Theme ${themeName} was successfully deployed in ${timeToDeploy} seconds.`);
+    await core.debug(`Page URL: ${pageUrl}`);
 
     await fetch(url, {
         method: 'POST',
